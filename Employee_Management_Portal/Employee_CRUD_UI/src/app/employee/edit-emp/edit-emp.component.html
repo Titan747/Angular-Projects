@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-between">
+  <h4 style="background-color: skyblue;font-weight: bold; font-family: 'Courier New', Courier, monospace; width: 25%; text-align: center;border-radius: 10px;font-size: 25px;">Edit Employee</h4>
+  
+  <button mat-button (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+  
+  </div>
+  
+  <div style="height: 350px;width: 900px;">
+    <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+      <div class="m-2 input-group" style="display: none;">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Employee ID</span>
+        </div>
+        <input readonly="readonly" type="text" class="form-control" name="empId" empId="ngModel" [(ngModel)]="service.formData.empId">
+      </div>
+
+      <div class="m-2 input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text widthg" for="employeename">Employee Name</span>
+        </div>
+        <input required minlength="2" type="text" id="employeename" class="form-control" name="empName" empName="ngModel" [(ngModel)]="service.formData.empName">
+      </div>
+      <!--<div class="m-3 input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Department Id</span>
+        </div>
+        <select class="form-control" name="deptId" deptId="ngModel" [(ngModel)]="service.formData.deptId" required>
+          <option *ngFor="let dl of listItems" [value]="dl">
+            {{dl}}
+        </option>
+      </select>
+     </div>-->
+      <div class="m-2 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text widthg">Department Name</span>
+          </div>
+          <select class="form-control" name="deptName" deptName="ngModel" (change)="onChange($event.target.value)" [(ngModel)]="service.formData.deptId" required>
+            <option *ngFor="let dl of departments" [value]="dl.deptId">
+              {{dl.deptName}}
+          </option>
+        </select>
+      </div>
+
+        <div class="m-2 input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text widthg">Email Id</span>
+            </div>
+            <input required minlength="2" type="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" class="form-control" name="emailId" emailId="ngModel" [(ngModel)]="service.formData.emailId">
+        </div>
+        <div for="status" class="m-2 input-group">
+          <div  class="input-group-prepend">
+            <span class="input-group-text widthg">Gender</span>
+          </div>
+          &nbsp; &nbsp;
+          <div>  
+          <!--<label class="radio-inline">
+            <input type="radio" name="male" [value]="male" [checked]="'male' == this.gen.toString()">male
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="female" [value]="female" [checked]="'female' == this.gen.toString()">female
+          </label>-->
+            <label class="radio-inline">
+              <input type="radio" name="gender" value="male" class="form-control"  [checked]="this.genMale" (change)="genderSave($event)">
+              Male 
+            </label> 
+            &nbsp;&nbsp;
+         <label class="radio-inline">
+           <input type="radio" name="gender" value="female" class="form-control" [checked]="this.genFemale" (change)="genderSave($event)">
+           Female  
+         </label>
+        </div>
+      </div>
+          <div class="m-2 input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text widthg">Date of Birth</span>
+              </div>
+              <input required [matDatepicker]="picker" class="form-control" [min]="minDate" [max]="maxDate" name="dateOfBirth" dateOfBirth="ngModel" [(ngModel)]="service.formData.dateOfBirth">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+            <div class="m-2 input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text widthg">Address</span>
+              </div>
+              <input required minlength="2" type="text" class="form-control" name="address" address="ngModel" [(ngModel)]="service.formData.address">
+          </div>
+          <div class="m-2 input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text widthg">Pin Code</span>
+            </div>
+            <input required pattern="[0-9]{5}" maxlength="5" class="form-control" name="pinCode" pinCode="ngModel" [(ngModel)]="service.formData.pinCode">
+        </div>
+    <button class="mt-1 buttonwidthset" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+    </form>
+  </div>

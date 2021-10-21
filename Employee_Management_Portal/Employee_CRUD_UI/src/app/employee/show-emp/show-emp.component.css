@@ -1,0 +1,18 @@
+mat-header-cell, mat-cell {
+  display: flex;
+  padding: 5px 0;
+  justify-content: center;
+  }
+
+  .customFlexContainer {
+    display: flex;
+    justify-content: space-between;
+    height: 0%;
+    align-content: center;
+  }
+  
+  button {
+    margin: 5px;  
+  }
+
+  .backspace { margin-left: 27px; }

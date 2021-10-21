@@ -1,0 +1,53 @@
+<mat-form-field>
+    <input  matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+  <div style="overflow:auto;">
+  <div class="mat-elevation-z8">
+  
+<mat-table [dataSource] = "listData" matSort>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+  
+  <ng-container  matColumnDef="EmployeeID">
+    <mat-header-cell style="display:none;" *matHeaderCellDef mat-sort-header>Employee ID</mat-header-cell>
+    <mat-header-cell style="display:none;" *matCellDef="let element">{{element.empId}}</mat-header-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="EmployeeName">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Employee Name</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.empName}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Department" >
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Department Name</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.deptName}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="MailID" >
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Email Id</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.emailId}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="DOJ" >
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Date of Birth</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.dateOfBirth |date : "dd/MM/yyyy"}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Gender" >
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.gender}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Address">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.address}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="PinCode" >
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Pin Code</mat-header-cell>
+    <mat-header-cell class="backspace" *matCellDef="let element">{{element.pinCode}}</mat-header-cell>
+  </ng-container>
+</mat-table>
+</div>
+</div>

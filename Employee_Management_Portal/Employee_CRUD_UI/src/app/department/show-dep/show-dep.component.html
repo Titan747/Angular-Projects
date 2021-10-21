@@ -1,0 +1,40 @@
+<div class="customFlexContainer">
+<mat-form-field>
+  <input  matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<button class="mt-2" mat-raised-button (click)="onAdd()" color="primary">Add Department</button>
+</div>
+
+<div style="overflow:auto;">
+<div class="mat-elevation-z8">
+
+<mat-table [dataSource] = "listData" matSort>
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+
+<ng-container matColumnDef="DepartmentID" >
+  <mat-header-cell style="display:none;" *matHeaderCellDef mat-sort-header>Department ID</mat-header-cell>
+  <mat-header-cell style="display:none;" *matCellDef="let element">{{element.deptId}}</mat-header-cell>
+</ng-container>
+
+<ng-container matColumnDef="DepartmentName" >
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Department Name</mat-header-cell>
+    <mat-header-cell *matCellDef="let element">{{element.deptName}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Options">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef>Options</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button (click)="onEdit(row)">
+        <mat-icon>launch</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDelete(row.deptId)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+    </mat-cell>
+  </ng-container>
+</mat-table>
+</div>
+</div>
+
+

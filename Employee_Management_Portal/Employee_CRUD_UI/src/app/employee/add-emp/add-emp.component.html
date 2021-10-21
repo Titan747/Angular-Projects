@@ -1,0 +1,118 @@
+<div class="d-flex justify-content-between">
+    <h4 style="background-color: skyblue;font-weight: bold; font-family: 'Courier New', Courier, monospace; width: 25%; text-align: center;border-radius: 10px;font-size: 25px;">Add Employee</h4>
+    
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    
+    </div>
+    <div class="m-2" style="height: 350px;width: 900px;">
+      <form #form="ngForm" [formGroup]="registerForm" (submit)="onSubmit(form)" autocomplete="off">
+        <div class="m-2 input-group">
+          <div class="input-group-prepend required">
+            <span class="input-group-text control-label widthg">Employee Name</span>
+          </div>
+          <input required formControlName="empName" [ngClass]="{ 'is-invalid': submitted && f.empName.errors }" data-toggle="tooltip" title="Enter alphabets only" type="text" class="form-control" name="empName" empName="ngModel" [(ngModel)]="service.formData.empName" placeholder="Enter your Full Name">
+          <div *ngIf="submitted && f.empName.errors" class="marginset invalid-feedback" >
+            <div *ngIf="f.empName.errors.required">Please enter Employee Name</div>
+        </div>
+        </div>
+        <div class="m-2 input-group">
+          <div class="input-group-prepend required">
+            <span class="input-group-text control-label widthg">Department Name</span>
+          </div>
+          <select [value]=null formControlName="departmentName" name="departmentName" title="Select Department" [ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }" required class="form-control" type="text" (change)="onChange($event.target.value)">
+            <option [value]="null" selected class="alert alert-danger" disabled>--Select Department--</option>
+            <option class="alert alert-success" [ngClass]="{ 'is-invalid': submitted && f.departmentName.errors }" *ngFor="let dl of departments" [value]="dl.deptId">
+              {{dl.deptName}}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.departmentName.errors" class="marginset invalid-feedback">
+            <div *ngIf="f.departmentName.errors.required">Please select Department Name</div>
+        </div>
+        </div>
+          <div class="m-2 input-group">
+              <div class="input-group-prepend required">
+                <span class="input-group-text control-label widthg">Email Id</span>
+              </div>
+              <input required minlength="2" type="text" formControlName="emailId"  [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" class="form-control" name="emailId" emailId="ngModel" [(ngModel)]="service.formData.emailId" placeholder="Enter your Email">
+              <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback marginset">
+                <div *ngIf="f.emailId.errors.required">Please enter Email Id</div>
+                <div *ngIf="f.emailId.errors.pattern">Email Id must be a valid email address</div>
+            </div>
+           </div>
+          <div class="m-2 input-group">
+            <div class="input-group-prepend required">
+              <span class="input-group-text control-label widthg">Date of Birth</span>
+            </div>
+            <input required [matDatepicker]="picker" [min]="minDate" [max]="maxDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }"
+             name="dateOfBirth" formControlName="dateOfBirth" dateOfBirth="ngModel" [(ngModel)]="service.formData.dateOfBirth" placeholder="Choose Date of Birth"/>
+            <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <div *ngIf="submitted && f.dateOfBirth.errors" class="invalid-feedback marginset"> 
+              <div *ngIf="f.dateOfBirth.invalid">Please select Date of Birth</div>
+              
+            </div>
+            <!--<div>
+              <input [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="dateOfBirth" class="form-control" dateOfBirth="ngModel" [(ngModel)]="service.formData.dateOfBirth" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }" />
+              <mat-datepicker-toggle matSuffix  [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>      
+              <div *ngIf="submitted && f.dateOfBirth.errors" class="invalid-feedback">
+                        <div *ngIf="f.dateOfBirth.errors.required">Date of Birth is required</div>
+                    </div>
+            </div>-->
+            <!--<div>
+              <input type="date" formControlName="dateOfBirth" class="form-control" dateOfBirth="ngModel" [(ngModel)]="service.formData.dateOfBirth" [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }" />
+                    <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                        <div *ngIf="f.dob.errors.required">Date of Birth is required</div>
+                        <div *ngIf="f.dob.errors.pattern">Date of Birth must be a valid date in the format YYYY-MM-DD</div>
+                    </div>
+            </div>-->
+          </div>
+          <div class="m-2 input-group">
+            <div class="input-group-prepend required">
+              <span class="input-group-text control-label widthg">Gender</span>
+            </div>
+            &nbsp; &nbsp; 
+            <div>
+              <label for="male" class="radio-inline has-validation">
+                <input id="male" type="radio" class="form-control" required formControlName="options" [ngClass]="{ 'is-invalid': submitted && f.options.errors }" (change)="changeGender($event)" for="male" name="options" (click)="model.options = 'male'" [checked]="model.options=='male'" value="male" gender="ngModel" [(ngModel)]="service.formData.gender">
+                Male  
+              </label>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <label for="female" class="radio-inline">
+             <input id="female" type="radio" class="form-control" required formControlName="options" [ngClass]="{ 'is-invalid': submitted && f.options.errors }" (change)="changeGender($event)" for="female" name="options" (click)="model.options = 'female'" [checked]="model.options=='female'" value="female" gender="ngModel" [(ngModel)]="service.formData.gender">
+             Female  
+            </label>
+           </div>
+           <div *ngIf="submitted && genderreq" class="input-group marginset invalid-feedback">
+            <div *ngIf=genderreq>Please select Gender</div>
+        </div>
+          </div>
+          <div class="m-2 input-group">
+            <div class="input-group-prepend required">
+              <span class="input-group-text control-label widthg">Address</span>
+            </div>
+            <input required type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" name="address" address="ngModel" [(ngModel)]="service.formData.address" placeholder="Enter your Address">
+            <div *ngIf="submitted && f.address.errors" class="marginset invalid-feedback">
+              <div *ngIf="f.address.errors.required">Please enter Address</div>
+          </div>
+          </div>
+          <div class="m-2 input-group">
+            <div class="input-group-prepend required">
+              <span class="input-group-text control-label widthg">Pin Code</span>
+            </div>
+            <input required maxlength="5" type="number" oninput="javascript: if (this.value.length > this.size) this.value = this.value.slice(0, this.size);"
+           size="5" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.pinCode.errors }" formControlName="pinCode" name="pinCode" pinCode="ngModel" [(ngModel)]="service.formData.pinCode" placeholder="Enter 5 Digits Only">
+           <div *ngIf="submitted && f.pinCode.errors" class="invalid-feedback marginset">
+            <div *ngIf="f.pinCode.errors.required">Please enter Picode</div>
+            <div *ngIf="f.pinCode.errors.pattern">Picode must have 5 numeric values</div>
+        </div>
+          </div>
+          <button class="mt-1 buttonwidthset" [disabled]="form.valid" mat-raised-button color="primary" type="submit">Submit</button>
+        </form>
+      </div>
+      <!--[disabled]="form.form.invalid"-->
+    <!--pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"-->
+    <!-- ng-untouched ng-pristine ng-valid-->
+      

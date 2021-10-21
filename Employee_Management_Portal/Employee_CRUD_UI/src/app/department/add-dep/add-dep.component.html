@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-between">
+<h4 style="background-color: skyblue;font-weight: bold; font-family: 'Courier New', Courier, monospace; width: 25%; text-align: center;border-radius: 10px;font-size: 25px;">Add Department</h4>
+
+<button mat-button (click)="onClose()">
+  <mat-icon>close</mat-icon>
+</button>
+
+</div>
+
+<div style="overflow: auto; height: 450px;">
+  <form #form="ngForm" [formGroup]="registerForm" (submit)="onSubmit(form)" autocomplete="off">
+    <div class="mt-2 input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Department Name</span>
+      </div>
+      <input required type="text" class="form-control" placeholder="Enter Department Name" formControlName="deptName" name="deptName" [ngClass]="{ 'is-invalid': submitted && f.deptName.errors }" deptName="ngModel" [(ngModel)]="service.formData.deptName">
+      <div *ngIf="submitted && f.deptName.errors" class="invalid-feedback">
+        <div *ngIf="f.deptName.errors.required">Please enter Department Name</div>
+    </div>
+    </div>
+  <button class="mt-4" mat-raised-button color="primary" type="submit">Submit</button>
+
+
+  </form>
+</div>

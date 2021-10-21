@@ -1,0 +1,84 @@
+<div class="customFlexContainer">
+<mat-form-field>
+  <div>
+    <input  matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </div>
+</mat-form-field>
+  <!--<select required class="form-control" bindValue="deptId" name="deptName" deptName="ngModel" [(ngModel)]="service.formData.deptName">
+    <option [value]="null" selected disabled>--Select Department--</option>
+    <option *ngFor="let dl of listItems">
+      {{dl}}
+    </option>
+  </select>-->
+<button class="mt-2" mat-raised-button (click)="onAdd()" color="primary" >Add Employee</button>
+</div>
+
+
+
+  <div style="overflow:auto;">
+  <div class="mat-elevation-z8">
+    
+<mat-table [dataSource] ="listData" matSort>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+  
+  
+  <ng-container  matColumnDef="EmployeeID">
+    <mat-header-cell style="display:none;" *matHeaderCellDef mat-sort-header>Employee ID</mat-header-cell>
+    <mat-header-cell style="display:none;" *matCellDef="let element">{{element.empId}}</mat-header-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="EmployeeName">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Employee Name</mat-header-cell>
+    <mat-header-cell *matCellDef="let element">{{element.empName}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="DepartmentID">
+    <mat-header-cell style="display:none;" *matHeaderCellDef mat-sort-header>Department ID</mat-header-cell>
+    <mat-header-cell style="display:none;" *matCellDef="let element">{{element.deptId}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Department">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Department Name</mat-header-cell>
+    <mat-header-cell *matCellDef="let element" class="backspace">{{element.deptName}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="EmailId">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Email Id</mat-header-cell>
+    <mat-header-cell *matCellDef="let element" class="backspace">{{element.emailId}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="DateOfBirth">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Date of Birth</mat-header-cell>
+    <mat-header-cell *matCellDef="let element" class="backspace">{{element.dateOfBirth |date : "dd/MM/yyyy"}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Gender">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Gender</mat-header-cell>
+    <mat-header-cell *matCellDef="let element" class="backspace">{{element.gender}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Address">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
+    <mat-header-cell *matCellDef="let element" class="backspace">{{element.address}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="PinCode">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef mat-sort-header>Pin Code</mat-header-cell>
+    <mat-header-cell *matCellDef="let element" class="backspace">{{element.pinCode}}</mat-header-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Options">
+    <mat-header-cell style="font-weight:bolder;" *matHeaderCellDef>Options</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button (click)="onEdit(row)">
+        <mat-icon>launch</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDelete(row.empId)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+    </mat-cell>
+  </ng-container>
+</mat-table>
+</div>
+</div>

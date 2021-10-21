@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-between m-3">
+    <h4 style="background-color: skyblue;font-weight: bold; font-family: 'Courier New', Courier, monospace; width: 25%; text-align: center;border-radius: 10px;font-size: 22px;">Edit Department</h4>
+    
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    
+    </div>
+    
+    <div style="height: 170px;width: 800px;">
+      <form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
+    
+          <div class="m-2 input-group" style="display: none;">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Department ID</span>
+              </div>
+              <input readonly="readonly" type="text" class="form-control" name="deptId" deptId="ngModel" [(ngModel)]="service.formData.deptId">
+          </div>
+        <div class="m-2 input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text widthg">Department Name</span>
+          </div>
+          <input required minlength="2" type="text" class="form-control" name="deptName" deptName="ngModel" [(ngModel)]="service.formData.deptName">
+        </div>
+      <button class="m-3" mat-raised-button color="primary" type="submit">Update</button>
+    
+    
+      </form>
+    </div>
